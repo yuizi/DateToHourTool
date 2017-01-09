@@ -1,0 +1,204 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="Content-Security-Policy" content="default-src * data:; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+  <script src="components/loader.js"></script>
+  <script src="lib/onsenui/js/onsenui.min.js"></script>
+
+  <link rel="stylesheet" href="components/loader.css">
+  <link rel="stylesheet" href="lib/onsenui/css/onsenui.css">
+  <link rel="stylesheet" href="lib/onsenui/css/onsen-css-components.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  <script>
+    // 月の日数
+    var DaysOfManthes = [31,28,31,
+                         30,31,30,
+                         31,31,30,
+                         31,30,31];
+    // 通し時間
+    var Hour = 0;
+                         
+    // 月のセレクターの値が変更された
+    function monthSelectorChanged(){
+        updateDaySelector();
+        
+        calcHour();
+    }
+
+    // 日のセレクターの値が変更された
+    function daySelectorChanged(){
+        
+        calcHour();
+    }
+    
+    // 時刻のセレクターの値が変更された
+    function hourSelectorChanged(){
+        
+        calcHour();
+    }
+
+    // 通し時間の計算
+    function calcHour(){
+        
+        // 月
+        var mm = document.getElementById('monthSelecter').selectedIndex;
+        var hour = 0;
+        for(var i=0; i<mm;i++){
+            hour += 24 * DaysOfManthes[i];
+        }
+        console.log('month=' + hour);
+        // 日
+        var dd = document.getElementById('daySelector').selectedIndex;
+//        hour += 24 * dd;
+//        console.log('month+day/00:00=' + hour);
+        
+        // 時刻
+        var hh = document.getElementById('hourSelector').selectedIndex;
+        
+        hour += 24*dd + hh;
+        
+        console.log((mm+1)+'月'+ (dd+1)+'日'+hh+'時, hour='+hour);
+        
+        // 通し時間の表示を更新する
+        document.getElementById('hour').textContent=hour;
+        
+    }
+    
+
+    // 日付のセレクターを更新する 
+    function updateDaySelector(){
+        var month = document.getElementById('monthSelecter');
+        var mm = month.selectedIndex;
+        console.log('mm= '+mm + 'last day: '+DaysOfManthes[mm]);
+        var days = document.getElementById('daySelector');    
+        // 一旦日付のリストをすべて削除する
+        while(days.lastChild)
+        {
+		    days.removeChild(days.lastChild);
+	    }
+        
+        console.log('days='+days);
+        // 選択中の「月」に合せて日付のリストを作成する
+        for (var i = 0; i <　DaysOfManthes[mm]; i++) {
+            var day = i+1;
+            var option = document.createElement('option');
+            option.setAttribute('value', day);
+            option.innerHTML = day;
+            console.log('day= '+day);
+            days.appendChild(option);        
+        }         
+     }
+  
+    ons.ready(function() {
+      console.log("Onsen UI is ready!");
+    });
+
+    document.addEventListener('show', function(event) {
+      var page = event.target;
+      var titleElement = document.querySelector('#toolbar-title');
+
+      if (page.matches('#first-page')) {
+        titleElement.innerHTML = 'My app - Page 1';
+        
+        // 初期化   
+        updateDaySelector();// 「日」のリストを更新
+
+        
+      } else if (page.matches('#second-page')) {
+        titleElement.innerHTML = 'My app - Page 2';
+      }
+    });
+  </script>
+</head>
+<body>
+  <ons-page>
+    <ons-toolbar>
+      <div class="center" id="toolbar-title"></div>
+    </ons-toolbar>
+    <ons-tabbar position="auto">
+      <ons-tab label="Tab 1" page="tab1.html" active>
+      </ons-tab>
+      <ons-tab label="Tab 2" page="tab2.html">
+      </ons-tab>
+    </ons-tabbar>
+  </ons-page>
+
+  <ons-template id="tab1.html">
+    <ons-page id="first-page">
+      <p style="text-align: center;">
+        This is the first page.
+      </p>
+      
+        <div data-role="fieldcontain">
+            <fieldset data-role="controlgroup">
+                <label for="monthSelecter">Month</label>
+                <select name="month" id="monthSelecter" onchange="monthSelectorChanged()">
+                    <option>Jan</option>
+                    <option>Feb</option>
+                    <option>Mar</option>
+                    <option>Apr</option>
+                    <option>May</option>
+                    <option>Jun</option>
+                    <option>Jul</option>
+                    <option>Aug</option>
+                    <option>Sep</option>
+                    <option>Oct</option>
+                    <option>Nov</option>
+                    <option>Dec</option>
+                </select>
+         
+                <label for="daySelector">Day</label>
+                <select name="day" id="daySelector" onchange="daySelectorChanged()">
+                </select>
+         
+                <label for="hourSelector">Hour</label>
+                <select name="hour" id="hourSelector" onchange="hourSelectorChanged()">
+                    <option>00:00</option>
+                    <option>01:00</option>
+                    <option>02:00</option>
+                    <option>03:00</option>
+                    <option>04:00</option>
+                    <option>05:00</option>
+                    <option>06:00</option>
+                    <option>07:00</option>
+                    <option>08:00</option>
+                    <option>09:00</option>
+                    <option>10:00</option>
+                    <option>11:00</option>
+                    <option>12:00</option>
+                    <option>13:00</option>
+                    <option>14:00</option>
+                    <option>15:00</option>
+                    <option>16:00</option>
+                    <option>17:00</option>
+                    <option>18:00</option>
+                    <option>19:00</option>
+                    <option>20:00</option>
+                    <option>21:00</option>
+                    <option>22:00</option>
+                    <option>23:00</option>
+                    <option>24:00</option>
+                </select>
+            </fieldset>
+           
+        </div> 
+        
+        <div>
+            Hour : <span id="hour">0</span>            
+        </div>
+      
+    </ons-page>
+  </ons-template>
+
+  <ons-template id="tab2.html">
+    <ons-page id="second-page">
+      <p style="text-align: center;">
+        This is the second page.
+      </p>
+    </ons-page>
+  </ons-template>
+</body>
+</html>
