@@ -116,9 +116,9 @@
       <div class="center" id="toolbar-title"></div>
     </ons-toolbar>
     <ons-tabbar position="auto">
-      <ons-tab label="Tab 1" page="tab1.html" active>
+      <ons-tab label="Hour" page="tab1.html" active>
       </ons-tab>
-      <ons-tab label="Tab 2" page="tab2.html">
+      <ons-tab label="Date" page="tab2.html">
       </ons-tab>
     </ons-tabbar>
   </ons-page>
@@ -126,10 +126,10 @@
   <ons-template id="tab1.html">
     <ons-page id="first-page">
       <p style="text-align: center;">
-        This is the first page.
+        日付時刻から通し時刻へ換算
       </p>
       
-        <div data-role="fieldcontain">
+        <div data-role="fieldcontain" id="datePanel">
             <fieldset data-role="controlgroup">
                 <label for="monthSelecter">Month</label>
                 <select name="month" id="monthSelecter" onchange="monthSelectorChanged()">
@@ -183,7 +183,7 @@
            
         </div> 
         
-        <div>
+        <div id="resultHour">
             Hour : <span id="hour">0</span>            
         </div>
       
