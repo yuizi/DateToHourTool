@@ -18,8 +18,6 @@
                          30,31,30,
                          31,31,30,
                          31,30,31];
-    // 通し時間
-    var Hour = 0;
                          
     // 月のセレクターの値が変更された
     function monthSelectorChanged(){
@@ -52,9 +50,7 @@
         console.log('month=' + hour);
         // 日
         var dd = document.getElementById('daySelector').selectedIndex;
-//        hour += 24 * dd;
-//        console.log('month+day/00:00=' + hour);
-        
+
         // 時刻
         var hh = document.getElementById('hourSelector').selectedIndex;
         
