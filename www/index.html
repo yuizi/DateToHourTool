@@ -58,6 +58,14 @@
         
         console.log((mm+1)+'月'+ (dd+1)+'日'+hh+'時, hour='+hour);
         
+        //if(asNextYear.isChecked()) {hour +=8760;}
+        
+        // 翌年がチェックされていれば換算する
+        var nextYear = document.getElementById('asNextYear').checked;
+        if(nextYear){
+         hour +=8760;   
+        }        
+        
         // 通し時間の表示を更新する
         document.getElementById('hour').textContent=hour;
         
@@ -87,7 +95,16 @@
             days.appendChild(option);        
         }         
      }
-  
+     
+     // 翌年の処理
+     function asNextYearChanged() {
+         console.log('AsNextYear state changed');
+         console.log(document.getElementById('asNextYear').checked ? 'ON' : 'OFF')
+         calcHour();
+     }
+     
+
+//  　ons.bootstrap();
     ons.ready(function() {
       console.log("Onsen UI is ready!");
     });
@@ -111,12 +128,12 @@
   </script>
 </head>
 <body>
-  <ons-page>
+  <ons-page modifier="mainPage" >
     <ons-toolbar>
       <div class="center" id="toolbar-title"></div>
     </ons-toolbar>
     <ons-tabbar position="auto">
-      <ons-tab label="Hour" page="tab1.html" active>
+      <ons-tab id="hourTab" label="Hour" page="tab1.html" active>
       </ons-tab>
       <ons-tab label="Date" page="tab2.html">
       </ons-tab>
@@ -186,6 +203,12 @@
         <div id="resultHour">
             Hour : <span id="hour">0</span>            
         </div>
+        <br/>
+        <div>
+        <span>As Next Year : </span>
+            <ons-switch onchange="asNextYearChanged()" id="asNextYear"></ons-switch>
+        </div>
+        
       
     </ons-page>
   </ons-template>

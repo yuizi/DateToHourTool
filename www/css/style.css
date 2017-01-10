@@ -1,10 +1,11 @@
 /**/
 
-/*body {
+body {
     background-color: #3D69A9;
     color: #AEBDD6;
     text-align: center;
 }
+
 */
 /*#first-page {
     background-color: #ffffff;
@@ -24,13 +25,29 @@ select{
     font-size: 16px;
 }
 
-
-.page1--blue__content {
+.page--blue__background {
+    /*background-color: blue;*/
 /*#tab1.html {*/
     background-color: #3D69A9;
 }
-.page2--red__content {
+/*.page--blue {*/
+#first-page {
+    color: white;
+    text-align: center;    
+
+}
+#hourTab {
+    /*background-color: black;*/
+    
+}
+/*#footer {
     background-color: red;
+    color: red;
+}*/
+.page--red__background {
+    /*background-color: red;*/
+        background-color: #3D69A9;
+
 }
 
 #resultHour {
