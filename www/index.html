@@ -58,8 +58,6 @@
         
         console.log((mm+1)+'月'+ (dd+1)+'日'+hh+'時, hour='+hour);
         
-        //if(asNextYear.isChecked()) {hour +=8760;}
-        
         // 翌年がチェックされていれば換算する
         var nextYear = document.getElementById('asNextYear').checked;
         if(nextYear){
@@ -68,11 +66,10 @@
         
         // 通し時間の表示を更新する
         document.getElementById('hour').textContent=hour;
-        
     }
     
 
-    // 日付のセレクターを更新する 
+    // 選択中の「月」に合せて日付のセレクターの日数を更新する 
     function updateDaySelector(){
         var month = document.getElementById('monthSelecter');
         var mm = month.selectedIndex;
@@ -85,7 +82,7 @@
 	    }
         
         console.log('days='+days);
-        // 選択中の「月」に合せて日付のリストを作成する
+        // 選択中の「月」に合せて日付のリストを再作成する
         for (var i = 0; i <　DaysOfManthes[mm]; i++) {
             var day = i+1;
             var option = document.createElement('option');
@@ -96,7 +93,7 @@
         }         
      }
      
-     // 翌年の処理
+     // 翌年、今年の時刻換算の切り換え（Onであれば翌年の通し時間として計算する）
      function asNextYearChanged() {
          console.log('AsNextYear state changed');
          console.log(document.getElementById('asNextYear').checked ? 'ON' : 'OFF')
@@ -119,7 +116,6 @@
         
         // 初期化   
         updateDaySelector();// 「日」のリストを更新
-
         
       } else if (page.matches('#second-page')) {
         titleElement.innerHTML = 'My app - Page 2';
